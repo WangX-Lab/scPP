@@ -58,7 +58,7 @@ Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-![image-20230608150200496](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608150200496.png)
+<img width="635" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/b8784ad9-c911-47ff-b921-667de946ecdc">
 
 
 
@@ -75,8 +75,7 @@ Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-![image-20230608150248729](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608150248729.png)
-
+<img width="637" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/2796dd06-a015-4852-9574-2a7b6d65772c">
 
 
 ## **Survival data**
@@ -93,7 +92,7 @@ Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-![image-20230608160258646](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608160258646.png)
+<img width="935" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d3ca4d5f-fbe4-4867-926c-84c84482917a">
 
 # Contact
 
