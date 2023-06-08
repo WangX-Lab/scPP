@@ -50,6 +50,10 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
 ```R
 library(ScPP)
 load(system.file("data/binary.RData",package = "ScPP"))
+
+identical(colnames(bulk),binary$Sample)
+TRUE
+
 sc = sc_Preprocess(sc_count)
 geneList = marker_Binary(bulk, binary, ref_group = "Normal")
 metadata = ScPP(sc, geneList)
@@ -70,6 +74,10 @@ DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```R
 library(ScPP)
 load(system.file("data/continuous.RData",package = "ScPP"))
+
+identical(colnames(bulk),continuous$samp)
+TRUE
+
 sc = sc_Preprocess(sc_count)
 geneList = marker_Continuous(bulk, continuous$TMB_non_silent)
 metadata = ScPP(sc, geneList)
@@ -88,6 +96,10 @@ DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```R
 library(ScPP)
 load(system.file("data/survival.RData",package = "ScPP"))
+
+identical(colnames(bulk),rownames(survival))
+TRUE
+
 sc = sc_Preprocess(sc_count)
 geneList = marker_Survival(bulk, survival)
 metadata = ScPP(sc, geneList)
