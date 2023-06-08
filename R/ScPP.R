@@ -32,8 +32,8 @@ ScPP = function(sc_dataset, geneList, probs = 0.2){
   ScPP_neg = intersect(downcells1,downcells2)
   ScPP_pos = intersect(upcells1,upcells2)
   
-  metadata$ScPP <- ifelse(rownames(metadata) %in% ScPP_pos, "ScPP+", "Background")
-  metadata$ScPP <- ifelse(rownames(metadata) %in% ScPP_neg, "ScPP-", metadata$ScPP)
+  metadata$ScPP <- ifelse(rownames(metadata) %in% ScPP_pos, "Phenotype+", "Background")
+  metadata$ScPP <- ifelse(rownames(metadata) %in% ScPP_neg, "Phenotype-", metadata$ScPP)
   
   return(metadata)
 }
