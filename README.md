@@ -14,11 +14,14 @@ if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
 devtools::install_github("WangX-Lab/ScPP")
 ```
-
+&nbsp;
+&nbsp;
 # Description
 
 To infer phenotypes of single cells from scRNA-seq data, ScPP requires three types of data as input, including single-cell transcriptomes, bulk transcriptomes, and phenotypic features in bulk data.The phenotypic features can be categorical variables, continuous variables, or clinical survival.
 
+&nbsp;
+&nbsp;
 # Details
 
 + The function `singcell_Preprocessing()` is for single cell expression data preprocessing. Its input is a count matrix with cell names in columns and gene names in rows.
@@ -44,11 +47,14 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
   + "geneList" is a gene list correlated with interested features, it can be the output of functions `marker_Binary()`, `marker_Continuous()` and `marker_Survival()` for binary variables, continuous varaibles and survival data, respectively.
   + "probs" is the α value of ScPP, with default 0.2.
 
+&nbsp;
+&nbsp;
 # Examples
 
+&nbsp;
+&nbsp;
 
-
-## **Apply ScPP with binary variables**
+## **Apply ScPP with binary variables** 
 
 ### **Prepare data**
 
@@ -109,7 +115,7 @@ sc_count[1:6,1:6]
 | A2ML1    | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
 
 
-
+&nbsp;
 
 
 ### Execute ScPP to select the informative cells
@@ -130,7 +136,8 @@ DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 
 
 
-
+&nbsp;
+&nbsp;
 
 
 ## **Apply ScPP with continuous variables**
@@ -195,7 +202,7 @@ sc_count[1:6,1:6]
 
 
 
-
+&nbsp;
 
 ### Execute ScPP to select the informative cells
 
@@ -211,7 +218,8 @@ DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 <img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d57f269d-484c-4887-9025-b7e6678d8ad8">
 
 
-
+&nbsp;
+&nbsp;
 
 ## **Apply ScPP with  survival data**
 
@@ -274,7 +282,7 @@ sc_count[1:6,1:6]
 | A2ML1    | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
 
 
-
+&nbsp;
 
 
 ### Execute ScPP to select the informative cells
@@ -291,7 +299,7 @@ DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 
 <img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/94dd963f-d9bc-416d-bb45-90edf81ed490">
 
-
+&nbsp;
 # Contact
 
 E-mail any questions to Xiaosheng Wang (xiaosheng.wang@cpu.edu.cn)
