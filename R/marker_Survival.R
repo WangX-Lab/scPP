@@ -39,8 +39,8 @@ marker_Survival <- function(bulk_data,survival_data){
   res$fdr <- p.adjust(res$pvalue, method = "fdr")
 
   geneList <- list(
-    gene_pos = res %>% filter(fdr < 0.05, exp(coef) > 1) %>% pull(variable), #correalted with worse survival
-    gene_neg = res %>% filter(fdr < 0.05, exp(coef) < 1) %>% pull(variable)  #correlated with better survival
+    gene_pos = res %>% filter(fdr < 0.05, coef > 1) %>% pull(variable), #correalted with worse survival
+    gene_neg = res %>% filter(fdr < 0.05, coef < 1) %>% pull(variable)  #correlated with better survival
   )
   if(length(geneList[[1]]) > 0 & length(geneList[[2]] > 0)){return(geneList)}
 
