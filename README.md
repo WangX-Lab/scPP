@@ -38,6 +38,8 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
   + "geneList" is a gene list correlated with the phenotypes of interest, which can be the output of functions `marker_Binary()`, `marker_Continuous()` and `marker_Survival()` for binary variables, continuous varaibles and survival data, respectively.
   + "probs" is the α value of ScPP ranging from 0.2 to 0.5 (default: 0.2), which is the cutoff for selecting top and bottom α proportion of single cells ranked based on AUCell scores.
 
+&nbsp;
+&nbsp;
 
 # Installation
 
