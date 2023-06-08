@@ -2,6 +2,9 @@
 
 A simple and effective algorithm for recognizing cell subpopulations with specific phenotypes based on the expression profiles of phenotype-associated marker genes in bulks and single cells.
 
+<img width="1022" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/e1367b81-9571-40bd-aed8-fb6811535fb5">
+
+
 # Installation
 
 Users can install the released version of ScPP with:
