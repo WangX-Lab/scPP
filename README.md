@@ -5,15 +5,6 @@ A simple and effective algorithm for recognizing cell subpopulations with specif
 <img width="1022" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/e1367b81-9571-40bd-aed8-fb6811535fb5">
 
 
-# Installation
-
-Users can install the released version of ScPP with:
-
-```
-if (!requireNamespace("devtools", quietly = TRUE))
-    install.packages("devtools")
-devtools::install_github("WangX-Lab/ScPP")
-```
 &nbsp;
 &nbsp;
 # Description
@@ -46,6 +37,17 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
   + "sc_dataset" is a seurat object of scRNA-seq data, which can be the output of the function `singcell_Preprocessing()`.
   + "geneList" is a gene list correlated with the phenotypes of interest, which can be the output of functions `marker_Binary()`, `marker_Continuous()` and `marker_Survival()` for binary variables, continuous varaibles and survival data, respectively.
   + "probs" is the α value of ScPP ranging from 0.2 to 0.5 (default: 0.2), which is the cutoff for selecting top and bottom α proportion of single cells ranked based on AUCell scores.
+
+
+# Installation
+
+Users can install the released version of ScPP with:
+
+```
+if (!requireNamespace("devtools", quietly = TRUE))
+    install.packages("devtools")
+devtools::install_github("WangX-Lab/ScPP")
+```
 
 &nbsp;
 &nbsp;
