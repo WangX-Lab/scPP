@@ -43,6 +43,8 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
 
 # Examples
 
+
+
 ## **Apply ScPP with binary variables**
 
 ### **Prepare data**
@@ -105,6 +107,8 @@ sc_count[1:6,1:6]
 
 
 
+
+
 ### Execute ScPP to select the informative cells
 
 ```R
@@ -118,7 +122,9 @@ Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-![image-20230608150200496](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608150200496.png)
+<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/beafb4d6-1fcb-4a3d-87ac-9e40d4fec7fa">
+
+
 
 
 
@@ -186,6 +192,8 @@ sc_count[1:6,1:6]
 
 
 
+
+
 ### Execute ScPP to select the informative cells
 
 ```R
@@ -197,7 +205,8 @@ Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-![image-20230608150248729](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608150248729.png)
+<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d57f269d-484c-4887-9025-b7e6678d8ad8">
+
 
 
 
@@ -263,6 +272,8 @@ sc_count[1:6,1:6]
 
 
 
+
+
 ### Execute ScPP to select the informative cells
 
 ```R
@@ -275,7 +286,8 @@ Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-![image-20230608160258646](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608160258646.png)
+<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/94dd963f-d9bc-416d-bb45-90edf81ed490">
+
 
 # Contact
 
