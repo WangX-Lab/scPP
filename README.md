@@ -54,11 +54,12 @@ metadata = ScPP(sc, geneList)
 head(metadata)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
+
 #Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-<img width="635" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/b8784ad9-c911-47ff-b921-667de946ecdc">
+<img width="637" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/b8784ad9-c911-47ff-b921-667de946ecdc">
 
 
 
@@ -72,6 +73,8 @@ geneList = marker_Continuous(bulk, continuous$TMB_non_silent)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
+
+#Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
@@ -85,14 +88,15 @@ library(ScPP)
 load(system.file("data/survival.RData",package = "ScPP"))
 sc = sc_Preprocess(sc_count)
 geneList = marker_Survival(bulk, survival)
-View(geneList)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
+
+#Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-<img width="935" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d3ca4d5f-fbe4-4867-926c-84c84482917a">
+<img width="637" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d3ca4d5f-fbe4-4867-926c-84c84482917a">
 
 # Contact
 
