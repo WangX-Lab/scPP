@@ -2,8 +2,6 @@
 
 A simple and effective algorithm for recognizing cell subpopulations with specific phenotypes based on the expression profiles of phenotype-associated marker genes in bulks and single cells.
 
-<img width="1027" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/02e6e102-c3ad-4617-9a4e-6b60de0717e2">
-
 # Installation
 
 Users can install the released version of ScPP with:
@@ -45,72 +43,239 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
 
 # Examples
 
-## **Binary variables**
+## **Apply ScPP with binary variables**
+
+### **Prepare data**
 
 ```R
 library(ScPP)
 load(system.file("data/binary.RData",package = "ScPP"))
+```
 
-identical(colnames(bulk),binary$Sample)
-TRUE
 
+
+**Bulk data**
+
+```R
+bulk[1:6,1:6]
+```
+
+|        | TCGA-CA-5256-01 | TCGA-AZ-6599-01 | TCGA-AA-3655-01 | TCGA-A6-6137-01 | TCGA-CK-4952-01 | TCGA-A6-5657-01 |
+| ------ | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
+| HIF3A  | 3.7172          | 2.3437          | 2.0858          | 6.0759          | 1.9506          | 5.4777          |
+| CAMK4  | 3.0698          | 4.9331          | 2.3709          | 4.1387          | 1.1557          | 4.1746          |
+| RNF112 | 1.3702          | 2.4817          | 2.4947          | 3.5941          | 2.3486          | 4.9185          |
+| SPN    | 5.5207          | 5.6704          | 6.8577          | 8.0598          | 5.0049          | 7.6076          |
+| LRRTM1 | 3.2408          | 1.6031          | 0.9465          | 1.9142          | 0               | 3.2523          |
+| GRIN1  | 3.0698          | 6.4944          | 4.3225          | 2.8073          | 7.346           | 4.5             |
+
+
+
+**Binary data**
+
+```R
+head(binary)
+```
+
+|      | Sample          | Feature |
+| ---- | --------------- | ------- |
+| 1    | TCGA-CA-5256-01 | Tumor   |
+| 2    | TCGA-AZ-6599-01 | Tumor   |
+| 3    | TCGA-AA-3655-01 | Tumor   |
+| 4    | TCGA-A6-6137-01 | Tumor   |
+| 5    | TCGA-CK-4952-01 | Tumor   |
+| 6    | TCGA-A6-5657-01 | Tumor   |
+
+
+
+**scRNA-count**
+
+```R
+sc_count[1:6,1:6]
+```
+
+|          | SMC01.T_AAACCTGCATACGCCG | SMC01.T_AAACCTGGTCGCATAT | SMC01.T_AAACCTGTCCCTTGCA | SMC01.T_AAACGGGAGGGAAACA | SMC01.T_AAACGGGGTATAGGTA | SMC01.T_AAAGATGAGGCCGAAT |
+| -------- | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| A1BG     | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A1BG-AS1 | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A1CF     | 0                        | 2                        | 0                        | 0                        | 3                        | 0                        |
+| A2M      | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A2M-AS1  | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A2ML1    | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+
+
+
+### Execute ScPP to select the informative cells
+
+```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Binary(bulk, binary, ref_group = "Normal")
 metadata = ScPP(sc, geneList)
 head(metadata)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
-
 #Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-<img width="637" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/b8784ad9-c911-47ff-b921-667de946ecdc">
+![image-20230608150200496](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608150200496.png)
 
 
 
-## **Continuous variables**
+
+
+## **Apply ScPP with continuous variables**
+
+### Prepare data
 
 ```R
 library(ScPP)
 load(system.file("data/continuous.RData",package = "ScPP"))
+```
 
-identical(colnames(bulk),continuous$samp)
-TRUE
 
+
+**Bulk data**
+
+```R
+bulk[1:6,1:6]
+```
+
+|        | TCGA-AZ-6599-01 | TCGA-AA-3655-01 | TCGA-A6-6137-01 | TCGA-CK-4952-01 | TCGA-A6-5657-01 | TCGA-AD-6963-01 |
+| ------ | --------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
+| HIF3A  | 2.3437          | 2.0858          | 6.0759          | 1.9506          | 5.4777          | 4.4634          |
+| CAMK4  | 4.9331          | 2.3709          | 4.1387          | 1.1557          | 4.1746          | 3.2363          |
+| RNF112 | 2.4817          | 2.4947          | 3.5941          | 2.3486          | 4.9185          | 1.4621          |
+| SPN    | 5.6704          | 6.8577          | 8.0598          | 5.0049          | 7.6076          | 7.396           |
+| LRRTM1 | 1.6031          | 0.9465          | 1.9142          | 0               | 3.2523          | 0               |
+| GRIN1  | 6.4944          | 4.3225          | 2.8073          | 7.346           | 4.5             | 3.1816          |
+
+
+
+**Binary data**
+
+```R
+head(continuous)
+```
+
+|      | samp            | TMB_non_silent |
+| ---- | --------------- | -------------- |
+| 1    | TCGA-AZ-6599-01 | 178            |
+| 2    | TCGA-AA-3655-01 | 65             |
+| 3    | TCGA-A6-6137-01 | 91             |
+| 4    | TCGA-CK-4952-01 | 206            |
+| 5    | TCGA-A6-5657-01 | 63             |
+| 6    | TCGA-AD-6963-01 | 67             |
+
+
+
+**scRNA-count**
+
+```R
+sc_count[1:6,1:6]
+```
+
+|          | SMC01.T_AAACCTGCATACGCCG | SMC01.T_AAACCTGGTCGCATAT | SMC01.T_AAACCTGTCCCTTGCA | SMC01.T_AAACGGGAGGGAAACA | SMC01.T_AAACGGGGTATAGGTA | SMC01.T_AAAGATGAGGCCGAAT |
+| -------- | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| A1BG     | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A1BG-AS1 | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A1CF     | 0                        | 2                        | 0                        | 0                        | 3                        | 0                        |
+| A2M      | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A2M-AS1  | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A2ML1    | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+
+
+
+### Execute ScPP to select the informative cells
+
+```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Continuous(bulk, continuous$TMB_non_silent)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
-
-#Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-<img width="637" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/2796dd06-a015-4852-9574-2a7b6d65772c">
+![image-20230608150248729](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608150248729.png)
 
 
-## **Survival data**
+
+## **Apply ScPP with  survival data**
+
+### Prepare data
 
 ```R
 library(ScPP)
 load(system.file("data/survival.RData",package = "ScPP"))
+```
 
-identical(colnames(bulk),rownames(survival))
-TRUE
 
+
+**Bulk data**
+
+```R
+bulk[1:6,1:6]
+```
+
+|         | TCGA-69-7978 | TCGA-62-8399 | TCGA-78-7539 | TCGA-73-4658 | TCGA-44-6775 | TCGA-44-2655 |
+| ------- | ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |
+| HIF3A   | 4.2598       | 11.6239      | 9.1362       | 5.0288       | 4.0573       | 5.5335       |
+| RTN4RL2 | 8.2023       | 5.5819       | 3.5365       | 7.4156       | 7.7107       | 5.3257       |
+| HMGCLL1 | 2.7476       | 5.8513       | 3.8334       | 3.6447       | 2.9188       | 4.882        |
+| LRRTM1  | 0            | 0.4628       | 4.7506       | 6.8005       | 7.7819       | 2.2882       |
+| GRIN1   | 6.6074       | 5.4257       | 4.9563       | 7.351        | 3.5361       | 3.3311       |
+| LRRTM3  | 1.7458       | 2.0092       | 0            | 1.4468       | 0            | 0            |
+
+
+
+**Survival data**
+
+```R
+head(survival)
+```
+
+|              | status | time  |
+| ------------ | ------ | ----- |
+| TCGA-69-7978 | 0      | 4.4   |
+| TCGA-62-8399 | 0      | 88.57 |
+| TCGA-78-7539 | 0      | 25.99 |
+| TCGA-73-4658 | 1      | 52.56 |
+| TCGA-44-6775 | 0      | 23.16 |
+| TCGA-44-2655 | 0      | 43.5  |
+
+
+
+**scRNA-count**
+
+```R
+sc_count[1:6,1:6]
+```
+
+|          | SMC01.T_AAACCTGCATACGCCG | SMC01.T_AAACCTGGTCGCATAT | SMC01.T_AAACCTGTCCCTTGCA | SMC01.T_AAACGGGAGGGAAACA | SMC01.T_AAACGGGGTATAGGTA | SMC01.T_AAAGATGAGGCCGAAT |
+| -------- | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ | ------------------------ |
+| A1BG     | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A1BG-AS1 | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A1CF     | 0                        | 2                        | 0                        | 0                        | 3                        | 0                        |
+| A2M      | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A2M-AS1  | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+| A2ML1    | 0                        | 0                        | 0                        | 0                        | 0                        | 0                        |
+
+
+
+### Execute ScPP to select the informative cells
+
+```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Survival(bulk, survival)
+View(geneList)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
-
-#Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
 ```
 
-<img width="637" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d3ca4d5f-fbe4-4867-926c-84c84482917a">
+![image-20230608160258646](/Users/rongzhuolong/Library/Application Support/typora-user-images/image-20230608160258646.png)
 
 # Contact
 
