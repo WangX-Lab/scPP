@@ -184,7 +184,7 @@ bulk[1:6,1:6]
 
 
 
-**Binary data**
+**Continuous data**
 
 ```R
 head(continuous)
