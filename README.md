@@ -43,7 +43,9 @@ To infer phenotypes of single cells from scRNA-seq data, ScPP requires three typ
 
 # Installation
 
-To install ScPP, first install the AUCell package, if it is not already installed:
+- The `Seurat` package (*version* >= 4.3.0) is used for loading data and preprocessing.
+
+- To install `ScPP`, first install the `AUCell` package （*version* >= 1.20.2）, if it is not already installed:
 &nbsp;
 ```R
 if (!require("BiocManager", quietly = TRUE))
@@ -51,10 +53,8 @@ if (!require("BiocManager", quietly = TRUE))
 
 BiocManager::install("AUCell")
 ```
-&nbsp;
-&nbsp;
 
-Finally, users can install the released version of ScPP with:
+- Finally, users can install the released version of `ScPP` with:
 &nbsp;
 ```R
 if (!requireNamespace("devtools", quietly = TRUE))
