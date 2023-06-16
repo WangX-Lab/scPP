@@ -306,7 +306,7 @@ sc_count[1:6,1:6]
 ```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Survival(bulk, survival)
-View(geneList)
+str(geneList)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
