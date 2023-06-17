@@ -144,10 +144,11 @@ head(metadata)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
 #Visualization of ScPP-identified cells
-DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
+DimPlot(sc, group = "ScPP", cols = c("grey","blue","red"))
 ```
 
-<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/beafb4d6-1fcb-4a3d-87ac-9e40d4fec7fa">
+<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/1808015c-3790-4a07-ba15-411496d42d22">
+
 
 
 
@@ -228,10 +229,11 @@ geneList = marker_Continuous(bulk, continuous$TMB_non_silent)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
-DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
+DimPlot(sc, group = "ScPP", cols = c("grey","blue","red"))
 ```
 
-<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/d57f269d-484c-4887-9025-b7e6678d8ad8">
+<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/6c7dac7b-138b-41e2-9ef1-af87baff06e3">
+
 
 
 &nbsp;
@@ -310,10 +312,11 @@ str(geneList)
 metadata = ScPP(sc, geneList)
 sc$ScPP = metadata$ScPP
 Idents(sc) = "ScPP"
-DimPlot(sc, group = "ScPP", cols = c("grey","red","blue"))
+DimPlot(sc, group = "ScPP", cols = c("grey","blue","red"))
 ```
 
-<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/94dd963f-d9bc-416d-bb45-90edf81ed490">
+<img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/47404d94-abe4-485c-8657-0f5e47bc62c3">
+
 
 &nbsp;
 # Contact
