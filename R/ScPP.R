@@ -17,7 +17,12 @@ ScPP = function(sc_dataset, geneList, probs = 0.2){
     stop("'sc_dataset' is missing or not a seurat object.")
 
   library(AUCell)
-  cellrankings = AUCell_buildRankings(sc_dataset@assays$RNA@data,plotStats = FALSE)
+  seurat_version <- packageVersion("Seurat")
+  if(!is.na(seurat_version) && seurat_version >= "5.0.0"){
+    cellrankings = AUCell_buildRankings(sc_dataset@assays$RNA$data,plotStats = FALSE)
+  }else{
+    cellrankings = AUCell_buildRankings(sc_dataset@assays$RNA@data,plotStats = FALSE)
+  }
   cellAUC = AUCell_calcAUC(geneList,cellrankings)
 
   metadata = as.data.frame(sc_dataset@meta.data)
@@ -35,5 +40,24 @@ ScPP = function(sc_dataset, geneList, probs = 0.2){
   metadata$ScPP <- ifelse(rownames(metadata) %in% ScPP_pos, "Phenotype+", "Background")
   metadata$ScPP <- ifelse(rownames(metadata) %in% ScPP_neg, "Phenotype-", metadata$ScPP)
   
-  return(metadata)
+  sc$ScPP = metadata$ScPP
+  Idents(sc) = "ScPP"
+  
+  markers <- FindMarkers(sc, ident.1 = "Phenotype+", ident.2 = "Phenotype-")
+  
+  genes_pos <- rownames(markers[which(markers$avg_log2FC > 1 & markers$p_val_adj < 0.05),])
+  if (length(genes_pos) == 0) {
+    message("There are no genes significantly upregulated in Phenotype+ compared to Phenotype-.")
+  }
+  
+  genes_neg <- rownames(markers[which(markers$avg_log2FC < -1 & markers$p_val_adj < 0.05),])
+  if (length(genes_neg) == 0) {
+    message("There are no genes significantly upregulated in Phenotype- compared to Phenotype+.")}
+  
+  res <- list(metadata = metadata,
+              Genes_pos = genes_pos,
+              Genes_neg = genes_neg)
+
+  return(res)
 }
+
