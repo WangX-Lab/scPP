@@ -139,12 +139,20 @@ sc_count[1:6,1:6]
 ```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Binary(bulk, binary, ref_group = "Normal")
-metadata = ScPP(sc, geneList)
-head(metadata)
-sc$ScPP = metadata$ScPP
+res = ScPP(sc, geneList)
+head(res$metadata)
+
+# Phenotype+ genes
+res$Genes_pos
+
+# Phenotype- genes
+res$Genes_neg
+
+# Visualization of ScPP-identified cells
+sc$ScPP = res$metadata$ScPP
 Idents(sc) = "ScPP"
-#Visualization of ScPP-identified cells
 DimPlot(sc, group = "ScPP", cols = c("grey","blue","red"))
+
 ```
 
 <img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/1808015c-3790-4a07-ba15-411496d42d22">
@@ -226,8 +234,17 @@ sc_count[1:6,1:6]
 ```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Continuous(bulk, continuous$TMB_non_silent)
-metadata = ScPP(sc, geneList)
-sc$ScPP = metadata$ScPP
+res = ScPP(sc, geneList)
+head(res$metadata)
+
+# Phenotype+ genes
+res$Genes_pos
+
+# Phenotype- genes
+res$Genes_neg
+
+# Visualization of ScPP-identified cells
+sc$ScPP = res$metadata$ScPP
 Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","blue","red"))
 ```
@@ -308,11 +325,21 @@ sc_count[1:6,1:6]
 ```R
 sc = sc_Preprocess(sc_count)
 geneList = marker_Survival(bulk, survival)
-str(geneList)
-metadata = ScPP(sc, geneList)
-sc$ScPP = metadata$ScPP
+res = ScPP(sc, geneList)
+head(res$metadata)
+
+# Phenotype+ genes
+res$Genes_pos
+
+# Phenotype- genes
+res$Genes_neg
+
+# Visualization of ScPP-identified cells
+sc$ScPP = res$metadata$ScPP
 Idents(sc) = "ScPP"
 DimPlot(sc, group = "ScPP", cols = c("grey","blue","red"))
+
+
 ```
 
 <img width="642" alt="image" src="https://github.com/WangX-Lab/ScPP/assets/54932820/47404d94-abe4-485c-8657-0f5e47bc62c3">
